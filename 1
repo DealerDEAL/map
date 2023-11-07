@@ -1,0 +1,40 @@
+#include <iostream>
+#include <map>
+#include <stdio.h>
+#include <iomanip>
+
+using namespace std;
+
+typedef std::map<string, string> Mymap;
+
+int main()
+{
+    Mymap c1;
+
+
+    c1.insert(Mymap::value_type("мир", "world"));
+    c1.insert(Mymap::value_type("смерть", "deth"));
+    c1.insert(Mymap::value_type("робот", "robot"));
+
+    cout << "chose function" << "\n";
+    cout << "1. enter new word" << setw(8);
+    cout << " 2. translet russian to england" << setw(4);
+    cout << " 3. translet england to russian" << setw(4);
+    cout << " 4. write word in file" << "\n";
+
+    int chosen;
+
+    cin >> chosen;
+
+    if (chosen == 1) {
+        
+    }
+
+    if (chosen == 2) {
+        string ru;
+        cout << "enter ryssian word" << "\n";
+        cin >> ru;
+        cout << c1.at(ru);
+    }
+return 0;
+}
