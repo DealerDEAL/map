@@ -1,0 +1,74 @@
+#include <iostream>
+#include <map>
+#include <iomanip>
+#include <fstream>
+
+using namespace std;
+
+typedef std::map<string, string> Mymap;
+std::map<string, string>::iterator it;
+
+int main()
+{
+    Mymap russian_to_england;
+    Mymap england_to_russian;
+
+
+    russian_to_england.insert(Mymap::value_type("мир", "world"));
+    russian_to_england.insert(Mymap::value_type("смерть", "deth"));
+    russian_to_england.insert(Mymap::value_type("робот", "robot"));
+    
+    england_to_russian.insert(Mymap::value_type("world","мир"));
+    england_to_russian.insert(Mymap::value_type("deth","смерть"));
+    england_to_russian.insert(Mymap::value_type("robot","робот"));
+
+    cout << "chose function" << "\n";
+    cout << "1. enter new word\n";
+    cout << "2. translet russian to england\n";
+    cout << "3. translet england to russian\n";
+    cout << "4. write word in file" << "\n";
+
+    int chosen;
+
+    cin >> chosen;
+
+    if (chosen == 1) {
+        string ru, eng, lacmus;
+        cout << "enter new russian word" << "\n";
+        cin >> ru;
+        it = russian_to_england.find(ru);
+        if(it == russian_to_england.end()){
+            cout << "enter new england word" << "\n";
+            cin >> eng;
+            russian_to_england.insert(pair<string,string>(ru, eng));
+            cout << russian_to_england.at(ru);
+        }
+        else {
+            cout << "t";
+            return 0;
+        }
+    }
+
+    if (chosen == 2) {
+        string ru;
+        cout << "enter ryssian word" << "\n";
+        cin >> ru;
+        cout << russian_to_england.at(ru);
+    }
+    
+    if(chosen == 3) {
+        string eng;
+        cout << "enter england word" << "\n";
+        cin >> eng;
+        cout << england_to_russian.at(eng);
+    }
+    
+    if(chosen == 4) {
+        ofstream file("hj.txt");
+        for (auto it = russian_to_england.begin(); it != russian_to_england.end(); ++it){
+             file << it->first << " - ";
+             file << it->second << "\n";
+        }
+    }
+return 0;
+}
