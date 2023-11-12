@@ -29,13 +29,22 @@ int getIntegerValue(string s, int b)
     int cnt = 0;
     while(b)
     {
+        if(b == 0){
+            cout << "N";
+            return 0;
+        }
         int curr = b % 10;
         b /= 10;
         for(int i = 0; i < cnt; ++i)
         {
             curr *= 10;
+            if(curr != 0){
+                if(curr > 1 || curr < 5 ){
+                    
+                }
+                cout << revers_mapping.at(curr) << "\n";
+            }
         }
-        cout << revers_mapping.at(curr) << "\n";
         ++cnt;
         //cout << curr << endl;
     }
