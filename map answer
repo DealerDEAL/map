@@ -4,18 +4,12 @@
 
 using namespace std;
  
-int getIntegerValue(string s, int b)
-{
+int getIntegerValue(string s) {
     unordered_map<char, int> mapping = {
         {'I', 1}, {'V', 5}, {'X', 10}, {'L', 50}, {'C', 100}, {'D', 500}, {'M', 1000}, {'N', 0}
     };
     
-    unordered_map<int, char> revers_mapping = {
-        {1, 'I'}, {5, 'V'}, {10, 'X'}, {50, 'L'}, {100, 'C'}, {500, 'D'}, {1000, 'M'}, {0, 'N'}
-    };
-    
     int value = 0;
-    char value_rev[256];
  
     for (int i = 0; i < s.length(); i++)
     {
@@ -26,48 +20,47 @@ int getIntegerValue(string s, int b)
             value += mapping[s[i]];
         }
     }
-    int cnt = 0;
-    while(b)
-    {
-        if(b == 0){
-            cout << "N";
-            return 0;
-        }
-        int curr = b % 10;
-        b /= 10;
-        for(int i = 0; i < cnt; ++i)
-        {
-            curr *= 10;
-            if(curr != 0){
-                if(curr > 1 || curr < 5 ){
-                    
-                }
-                cout << revers_mapping.at(curr) << "\n";
-            }
-        }
-        ++cnt;
-        //cout << curr << endl;
-    }
-    cout << value_rev;
  
-    return value;//value_rev;
+    return value;
 }
 
+string to_roman(int b)
+{
+  struct romandata_t { int b; char const* numeral; };
+  static romandata_t const romandata[] =
+     { 1000, "M",
+        900, "CM",
+        500, "D",
+        400, "CD",
+        100, "C",
+         90, "XC",
+         50, "L",
+         40, "XL",
+         10, "X",
+          9, "IX",
+          5, "V",
+          4, "IV",
+          1, "I",
+          0, NULL }; // end marker
+
+  string result;
+  for (romandata_t const* current = romandata; current->b > 0; ++current)
+  {
+    while (b >= current->b)
+    {
+      result += current->numeral;
+      b -= current->b;
+    }
+  }
+  return result;
+}
 
  
-int main()
-{
+int main() {
     string s;
     int b;
     cin >> s;
     cin >> b;
-    char b_c[5];
-    string b_s[5];
-    /*for(int i = 0; i < 5; i++){
-        cin >> b_s[i];
-        b_c[i] = b_s[i][0];
-    }*/
-    cout << getIntegerValue(s, b);
- 
-    return 0;
+    cout << getIntegerValue(s) << "\n";
+    cout << to_roman(b);
 }
