@@ -24,7 +24,7 @@ int getIntegerValue(string s) {
     return value;
 }
 
-string to_roman(int b)
+string to_roman(int b) // https://csharp.webdelphi.ru/algoritm-perevoda-chisel-iz-arabskoj-sistemy-v-rimskuyu-i-obratno/ алгоритм
 {
   struct romandata_t { int b; char const* numeral; };
   static romandata_t const romandata[] =
@@ -44,15 +44,14 @@ string to_roman(int b)
           0, NULL }; // end marker
 
   string result;
-  for (romandata_t const* current = romandata; current->b > 0; ++current)
+  for (romandata_t const* current = romandata; current->b > 0; ++current) 
   {
     while (b >= current->b)
     {
       result += current->numeral;
       b -= current->b;
     }
-  }
-  return result;
+  }  return result;
 }
 
  
